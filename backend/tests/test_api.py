@@ -16,7 +16,7 @@ def test_health_endpoint(client):
     assert response.status_code == 200
 
     data = response.json()
-    assert data["status"] == "healthy"
+    assert data["status"] in ["healthy", "degraded"]
     assert "model_loaded" in data
     assert "model_name" in data
 

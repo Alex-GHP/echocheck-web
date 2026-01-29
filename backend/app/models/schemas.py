@@ -1,4 +1,29 @@
-from pydantic import BaseModel, Field
+import re
+
+from pydantic import BaseModel, Field, field_validator
+
+
+def sanitize_text(text: str) -> str:
+    """
+    Sanitize input text by removing potentially harmful content.
+
+    - Strips leading/trailing whitespace
+    - Removes control characters (except newlines and tabs)
+    - Normalizes multiple spaces to single space
+    - Normalizes multiple newlines to double newline (paragraph break)
+    """
+
+    # Remove control characters except \n and \t
+    text = re.sub(r"[\x00-\x08\x0b\x0c\x0e-\x1f\x7f-\x9f]", "", text)
+
+    # Normalize whitespace (but preserve intentional line breaks)
+    text = re.sub(r"[^\S\n]+", " ", text)  # Multiple spaces/tabs to single space
+    text = re.sub(r"\n{3,}", "\n\n", text)  # 3+ newlines to 2
+
+    # Strip leading/trailing whitespace
+    text = text.strip()
+
+    return text
 
 
 class ClassifyRequest(BaseModel):
@@ -13,6 +38,20 @@ class ClassifyRequest(BaseModel):
             "The government should increase social spending to support working families."
         ],
     )
+
+    @field_validator("text", mode="before")
+    @classmethod
+    def sanitize_and_validate_text(cls, v: str) -> str:
+        """Sanitize text before validation"""
+        if not isinstance(v, str):
+            raise ValueError("Text must be a string")
+
+        sanitized = sanitize_text(v)
+
+        if not sanitized or sanitized.isspace():
+            raise ValueError("Text cannot be empty or whitespace only")
+
+        return sanitized
 
 
 class ProbabilityScores(BaseModel):

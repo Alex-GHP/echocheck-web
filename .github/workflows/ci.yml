@@ -38,8 +38,7 @@ jobs:
         run: uv run ruff format --check .
 
       - name: Run tests
-        run: uv run pytest --tb=short
-        continue-on-error: true 
+        run: uv run pytest --tb=short -v
 
   # Frontend tests and linting
   frontend:
@@ -76,7 +75,6 @@ jobs:
 
       - name: Run tests
         run: pnpm test:run
-        continue-on-error: true 
 
       - name: Build
         run: pnpm build

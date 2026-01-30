@@ -4,9 +4,11 @@ from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 
 from app.core.config import get_settings
-from app.routers import classify
+from app.routers import auth, classify
 from app.services.classifier import get_classifier
 from app.services.database import database
+from app.services.users import get_user_service
+from app.services.verification import get_verification_service
 
 
 @asynccontextmanager
@@ -24,6 +26,12 @@ async def lifespan(_app: FastAPI):
 
     try:
         await database.connect()
+
+        user_service = get_user_service()
+        verification_service = get_verification_service()
+        await user_service.setup_indexes()
+        await verification_service.setup_indexes()
+
     except Exception as e:
         print(f"Could not connect to MongoDB: {e}. API will run without database")
 
@@ -36,7 +44,7 @@ async def lifespan(_app: FastAPI):
 settings = get_settings()
 
 app = FastAPI(
-    title="EchoCheck API",
+    title=settings.api_title,
     description="Political stance classification API using RoBERTa-based model",
     version=settings.api_version,
     lifespan=lifespan,
@@ -45,7 +53,6 @@ app = FastAPI(
 )
 
 # CORS middleware, replace with frontend URL in production
-
 app.add_middleware(
     CORSMiddleware,
     allow_origins=["*"],  # TODO: Restrict in production
@@ -55,6 +62,7 @@ app.add_middleware(
 )
 
 app.include_router(classify.router, prefix="/api", tags=["classification"])
+app.include_router(auth.router, prefix="/api/auth", tags=["authentication"])
 
 
 @app.get("/")

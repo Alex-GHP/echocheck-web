@@ -15,6 +15,17 @@ class Settings(BaseSettings):
     api_title: str = "EchoCheck API"
     api_version: str = "1.0.0"
 
+    jwt_secret_key: str = "your-secret-key-change-in-production"
+    jwt_algorithm: str = "HS256"
+    jwt_access_token_expire_minutes: int = 30
+    jwt_refresh_token_expire_days: int = 7
+
+    resend_api_key: str = "re_your_api_key_here"
+    resend_from_email: str = "onboarding@resend.dev"
+
+    verification_code_expire_minutes: int = 10
+    verification_code_length: int = 6
+
     model_config = ConfigDict(
         env_file=".env",
         env_file_encoding="utf-8",

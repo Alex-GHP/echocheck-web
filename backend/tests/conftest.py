@@ -3,20 +3,47 @@ from fastapi.testclient import TestClient
 from httpx import ASGITransport, AsyncClient
 
 from app.main import app
+from app.services.database import database
 
 
 @pytest.fixture
 def client():
     """Synchronous test client"""
-    return TestClient(app)
+    with TestClient(app) as c:
+        yield c
 
 
 @pytest.fixture
 async def async_client():
-    """Asynchronous test client"""
+    """
+    Asynchronous test client with database connection.
+    Creates a fresh database connection for each test to avoid event loop issues.
+    """
+    if database.client is not None:
+        try:
+            await database.disconnect()
+        except Exception:  # noqa: BLE001, S110
+            database.client = None
+            database.db = None
+        else:
+            database.client = None
+            database.db = None
+
+    try:
+        await database.connect()
+    except Exception:  # noqa: BLE001, S110
+        _ = None
+
     transport = ASGITransport(app=app)
     async with AsyncClient(transport=transport, base_url="http://test") as client:
         yield client
+
+    try:
+        await database.disconnect()
+    except Exception:  # noqa: BLE001, S110
+        _ = None
+    database.client = None
+    database.db = None
 
 
 @pytest.fixture

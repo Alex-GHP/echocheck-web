@@ -26,11 +26,18 @@ class Settings(BaseSettings):
     verification_code_expire_minutes: int = 10
     verification_code_length: int = 6
 
+    max_file_size_mb: int = 10
+    allowed_file_extensions: list[str] = [".txt", ".pdf", ".docx"]
+
     model_config = ConfigDict(
         env_file=".env",
         env_file_encoding="utf-8",
         case_sensitive=False,
     )
+
+    @property
+    def max_file_size_bytes(self) -> int:
+        return self.max_file_size_mb * 1024 * 1024
 
 
 @lru_cache

@@ -1,4 +1,5 @@
 import re
+from enum import Enum
 
 from pydantic import BaseModel, Field, field_validator
 
@@ -24,6 +25,12 @@ def sanitize_text(text: str) -> str:
     text = text.strip()
 
     return text
+
+
+class FileType(str, Enum):
+    TXT = "txt"
+    PDF = "pdf"
+    DOCX = "docx"
 
 
 class ClassifyRequest(BaseModel):
@@ -82,6 +89,31 @@ class ClassifyResponse(BaseModel):
                     "prediction": "left",
                     "confidence": 0.873,
                     "probabilities": {"center": 0.082, "left": 0.873, "right": 0.045},
+                }
+            ]
+        }
+    }
+
+
+class FileClassifyResponse(ClassifyResponse):
+    """Response from file classification endpoint"""
+
+    filename: str = Field(..., description="Original filename that was processed")
+    file_type: FileType = Field(..., description="Type of file that was processed")
+    extracted_length: int = Field(
+        ..., description="Number of characters extracted from the file"
+    )
+
+    model_config = {
+        "json_schema_extra": {
+            "examples": [
+                {
+                    "prediction": "left",
+                    "confidence": 0.873,
+                    "probabilities": {"center": 0.082, "left": 0.873, "right": 0.045},
+                    "filename": "article.pdf",
+                    "file_type": "pdf",
+                    "extracted_length": 2500,
                 }
             ]
         }

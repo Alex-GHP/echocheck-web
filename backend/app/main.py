@@ -4,7 +4,7 @@ from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 
 from app.core.config import get_settings
-from app.routers import auth, classify
+from app.routers import auth, classify, feedback
 from app.services.classifier import get_classifier
 from app.services.database import database
 from app.services.users import get_user_service
@@ -63,6 +63,7 @@ app.add_middleware(
 
 app.include_router(classify.router, prefix="/api", tags=["classification"])
 app.include_router(auth.router, prefix="/api/auth", tags=["authentication"])
+app.include_router(feedback.router, prefix="/api", tags=["feedback"])
 
 
 @app.get("/")

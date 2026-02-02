@@ -6,6 +6,8 @@ import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
+  DropdownMenuLabel,
+  DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu"
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet"
@@ -17,6 +19,15 @@ const navLinks = [
   { href: "/", label: "Home" },
   { href: "/about", label: "About" },
 ]
+
+function Avatar({ email }: { email: string }) {
+  const initial = email.charAt(0).toUpperCase()
+  return (
+    <div className="flex h-8 w-8 items-center justify-center rounded-full bg-primary text-sm font-medium text-primary-foreground">
+      {initial}
+    </div>
+  )
+}
 
 export function Header() {
   const location = useLocation()
@@ -72,15 +83,19 @@ export function Header() {
 
           <div className="hidden md:flex items-center gap-2">
             {isLoading ? (
-              <div className="h-9 w-20 animate-pulse rounded-md bg-muted" />
+              <div className="h-8 w-8 animate-pulse rounded-full bg-muted" />
             ) : user ? (
               <DropdownMenu>
                 <DropdownMenuTrigger asChild>
-                  <Button variant="ghost" className="gap-2">
-                    <span className="text-sm text-muted-foreground">{user.email}</span>
+                  <Button variant="ghost" size="icon" className="h-9 w-9 rounded-full p-0">
+                    <Avatar email={user.email} />
                   </Button>
                 </DropdownMenuTrigger>
-                <DropdownMenuContent align="end">
+                <DropdownMenuContent align="end" className="w-56">
+                  <DropdownMenuLabel className="font-normal">
+                    <p className="text-sm font-medium">{user.email}</p>
+                  </DropdownMenuLabel>
+                  <DropdownMenuSeparator />
                   <DropdownMenuItem onClick={handleSignOut} className="gap-2 cursor-pointer">
                     <LogOut className="h-4 w-4" />
                     Sign Out
@@ -123,8 +138,11 @@ export function Header() {
 
                 <div className="border-t pt-4">
                   {user ? (
-                    <div className="flex flex-col gap-2">
-                      <span className="px-3 text-sm text-muted-foreground">{user.email}</span>
+                    <div className="flex flex-col gap-3">
+                      <div className="flex items-center gap-3 px-3">
+                        <Avatar email={user.email} />
+                        <span className="text-sm text-muted-foreground truncate">{user.email}</span>
+                      </div>
                       <Button
                         variant="ghost"
                         onClick={handleSignOut}

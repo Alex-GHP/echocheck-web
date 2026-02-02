@@ -9,9 +9,9 @@ import { AboutPage } from "@/pages/about"
 
 function AppLayout({ children }: { children: React.ReactNode }) {
   return (
-    <div className="min-h-screen bg-background font-sans antialiased">
+    <div className="flex min-h-screen flex-col bg-background font-sans antialiased">
       <Header />
-      <main>{children}</main>
+      <main className="flex flex-1 flex-col">{children}</main>
     </div>
   )
 }

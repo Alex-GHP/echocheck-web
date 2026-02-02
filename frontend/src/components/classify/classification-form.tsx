@@ -94,7 +94,7 @@ export function ClassificationForm({
         </label>
         <Textarea
           id="text-input"
-          placeholder="Enter political text to analyze (recommended: ~500 words)..."
+          placeholder="Enter political article, social media post or text to analyze (recommended: ~500 words)..."
           value={text}
           onChange={(e) => setText(e.target.value)}
           className="min-h-[240px] resize-none bg-background border-input focus:ring-2 focus:ring-primary/20"
@@ -175,7 +175,7 @@ export function ClassificationForm({
                       </div>
                       <div>
                         <p className="text-sm font-medium text-foreground">
-                          Drop a file here or click to upload
+                          Drop a file or click to upload
                         </p>
                         <p className="text-xs text-muted-foreground mt-1">
                           Supports .txt, .pdf, .docx files

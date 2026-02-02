@@ -1,11 +1,11 @@
-import { Radio, Brain, BarChart3, AlertTriangle, Github, Twitter } from "lucide-react"
-import { Link } from "react-router-dom"
+import { Radio, Brain, BarChart3, AlertTriangle } from "lucide-react"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
+import { Footer } from "@/components/layout/footer"
 
 export function AboutPage() {
   return (
-    <div className="min-h-[calc(100vh-4rem)]">
+    <div className="flex flex-1 flex-col">
       {/* Hero Section */}
       <section className="relative border-b border-border/40 bg-gradient-to-b from-primary/5 to-background">
         <div className="container px-4 py-16 md:py-24">
@@ -44,8 +44,14 @@ export function AboutPage() {
             <p className="text-muted-foreground leading-relaxed mb-6">
               EchoCheck is an advanced text analysis tool that uses machine learning to determine
               the political leaning of written content. Whether you are analyzing news articles,
-              social media posts, or political speeches, EchoCheck provides objective insights into
-              the ideological stance of the text.
+              social media posts, or political speeches, EchoCheck provides{" "}
+              <a
+                href="#disclaimer"
+                className="text-primary font-medium underline underline-offset-4 decoration-primary/50 hover:decoration-primary transition-colors"
+              >
+                objective
+              </a>
+              * insights into the ideological stance of the text.
             </p>
             <p className="text-muted-foreground leading-relaxed">
               Our goal is to promote media literacy and help users understand the political
@@ -112,7 +118,7 @@ export function AboutPage() {
       </section>
 
       {/* Disclaimer */}
-      <section className="border-b border-border/40">
+      <section id="disclaimer" className="border-b border-border/40 scroll-mt-20">
         <div className="container px-4 py-16">
           <div className="max-w-3xl mx-auto">
             <Card className="border-yellow-500/30 bg-yellow-500/5">
@@ -133,7 +139,17 @@ export function AboutPage() {
                 <ul className="text-sm text-muted-foreground space-y-2 list-disc list-inside">
                   <li>Political spectrums are complex and vary by country and context</li>
                   <li>The model may not accurately capture nuance or satire</li>
-                  <li>Results can be influenced by training data biases</li>
+                  <li>
+                    Results can be influenced by{" "}
+                    <a
+                      href="https://github.com/launchnlp/POLITICS"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="text-primary font-medium underline underline-offset-4 decoration-primary/50 hover:decoration-primary transition-colors"
+                    >
+                      training data biases
+                    </a>
+                  </li>
                   <li>Short texts may produce less reliable results</li>
                 </ul>
                 <p className="text-sm text-muted-foreground">
@@ -147,70 +163,7 @@ export function AboutPage() {
         </div>
       </section>
 
-      {/* Footer */}
-      <footer className="bg-muted/30">
-        <div className="container px-4 py-12">
-          <div className="max-w-4xl mx-auto">
-            <div className="flex flex-col md:flex-row items-center justify-between gap-6">
-              <div className="flex items-center gap-2">
-                <div className="h-8 w-8 rounded-lg bg-primary flex items-center justify-center">
-                  <Radio className="h-4 w-4 text-primary-foreground" />
-                </div>
-                <span className="font-semibold">EchoCheck</span>
-              </div>
-
-              <nav className="flex items-center gap-6">
-                <Link
-                  to="/"
-                  className="text-sm text-muted-foreground hover:text-foreground transition-colors"
-                >
-                  Home
-                </Link>
-                <Link
-                  to="/about"
-                  className="text-sm text-muted-foreground hover:text-foreground transition-colors"
-                >
-                  About
-                </Link>
-                <Link
-                  to="/auth"
-                  className="text-sm text-muted-foreground hover:text-foreground transition-colors"
-                >
-                  Sign In
-                </Link>
-              </nav>
-
-              <div className="flex items-center gap-4">
-                <a
-                  href="https://github.com/Alex-GHP/echocheck-web"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="text-muted-foreground hover:text-foreground transition-colors"
-                >
-                  <Github className="h-5 w-5" />
-                  <span className="sr-only">GitHub</span>
-                </a>
-                <a
-                  href="https://twitter.com"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="text-muted-foreground hover:text-foreground transition-colors"
-                >
-                  <Twitter className="h-5 w-5" />
-                  <span className="sr-only">Twitter</span>
-                </a>
-              </div>
-            </div>
-
-            <div className="mt-8 pt-8 border-t border-border/40 text-center">
-              <p className="text-xs text-muted-foreground">
-                © {new Date().getFullYear()} EchoCheck. Built for media literacy and informed
-                citizenship.
-              </p>
-            </div>
-          </div>
-        </div>
-      </footer>
+      <Footer />
     </div>
   )
 }

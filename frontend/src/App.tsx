@@ -1,11 +1,11 @@
-import { BrowserRouter, Routes, Route } from "react-router-dom"
-import { ThemeProvider } from "@/components/providers/theme-provider"
-import { AuthProvider } from "@/components/providers/auth-provider"
-import { Toaster } from "@/components/ui/toaster"
+import { BrowserRouter, Route, Routes } from "react-router-dom"
 import { Header } from "@/components/layout/header"
-import { HomePage } from "@/pages/home"
-import { AuthPage } from "@/pages/auth"
+import { AuthProvider } from "@/components/providers/auth-provider"
+import { ThemeProvider } from "@/components/providers/theme-provider"
+import { Toaster } from "@/components/ui/toaster"
 import { AboutPage } from "@/pages/about"
+import { AuthPage } from "@/pages/auth"
+import { HomePage } from "@/pages/home"
 
 function AppLayout({ children }: { children: React.ReactNode }) {
   return (

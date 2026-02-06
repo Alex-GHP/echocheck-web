@@ -1,5 +1,5 @@
+import { Github, Linkedin, Radio } from "lucide-react"
 import { Link } from "react-router-dom"
-import { Radio, Github, Linkedin } from "lucide-react"
 
 export function Footer() {
   return (

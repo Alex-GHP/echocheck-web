@@ -1,6 +1,8 @@
+import { LogOut, Menu, Moon, Radio, Sun } from "lucide-react"
 import { useState } from "react"
 import { Link, useLocation } from "react-router-dom"
-import { Menu, Moon, Sun, LogOut, Radio } from "lucide-react"
+import { useAuth } from "@/components/providers/auth-provider"
+import { useTheme } from "@/components/providers/theme-provider"
 import { Button } from "@/components/ui/button"
 import {
   DropdownMenu,
@@ -11,8 +13,6 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu"
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet"
-import { useAuth } from "@/components/providers/auth-provider"
-import { useTheme } from "@/components/providers/theme-provider"
 import { cn } from "@/lib/utils"
 
 const navLinks = [

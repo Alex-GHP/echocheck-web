@@ -1,5 +1,5 @@
-import api from "@/lib/api"
 import type { AxiosError } from "axios"
+import api from "@/lib/api"
 
 export interface FeedbackRequest {
   text: string

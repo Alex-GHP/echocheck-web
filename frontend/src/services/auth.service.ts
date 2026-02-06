@@ -1,5 +1,5 @@
-import api, { tokenStorage } from "@/lib/api"
 import type { AxiosError } from "axios"
+import api, { tokenStorage } from "@/lib/api"
 
 export interface User {
   id: string

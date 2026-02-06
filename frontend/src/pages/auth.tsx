@@ -1,13 +1,13 @@
-import { useState, useEffect, type FormEvent } from "react"
-import { useNavigate } from "react-router-dom"
 import { Eye, EyeOff, Loader2, Radio } from "lucide-react"
+import { type FormEvent, useEffect, useState } from "react"
+import { useNavigate } from "react-router-dom"
+import { useAuth } from "@/components/providers/auth-provider"
 import { Button } from "@/components/ui/button"
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
 import { useToast } from "@/components/ui/use-toast"
-import { useAuth } from "@/components/providers/auth-provider"
 import { authService } from "@/services/auth.service"
 
 export function AuthPage() {

@@ -1,14 +1,14 @@
+import { AlertTriangle } from "lucide-react"
 import { useState } from "react"
 import { Link } from "react-router-dom"
-import { AlertTriangle } from "lucide-react"
 import { ClassificationForm } from "@/components/classify/classification-form"
 import {
-  ClassificationResults,
   type ClassificationResult,
+  ClassificationResults,
 } from "@/components/classify/classification-results"
 import { Footer } from "@/components/layout/footer"
-import { classifyService } from "@/services/classify.service"
 import { useToast } from "@/components/ui/use-toast"
+import { classifyService } from "@/services/classify.service"
 
 export function HomePage() {
   const [result, setResult] = useState<ClassificationResult | null>(null)

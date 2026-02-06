@@ -1,7 +1,7 @@
-import { Radio, Brain, BarChart3, AlertTriangle } from "lucide-react"
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
-import { Badge } from "@/components/ui/badge"
+import { AlertTriangle, BarChart3, Brain, Radio } from "lucide-react"
 import { Footer } from "@/components/layout/footer"
+import { Badge } from "@/components/ui/badge"
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 
 export function AboutPage() {
   return (

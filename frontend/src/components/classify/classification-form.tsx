@@ -1,9 +1,9 @@
-import { useState, useRef, type ChangeEvent, type DragEvent } from "react"
-import { Upload, X, FileText, Lock, Loader2 } from "lucide-react"
+import { FileText, Loader2, Lock, Upload, X } from "lucide-react"
+import { type ChangeEvent, type DragEvent, useRef, useState } from "react"
+import { useAuth } from "@/components/providers/auth-provider"
 import { Button } from "@/components/ui/button"
 import { Textarea } from "@/components/ui/textarea"
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/components/ui/tooltip"
-import { useAuth } from "@/components/providers/auth-provider"
 import { cn } from "@/lib/utils"
 
 interface ClassificationFormProps {

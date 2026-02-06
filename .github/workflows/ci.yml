@@ -71,10 +71,13 @@ jobs:
         run: pnpm check
 
       - name: Run TypeScript check
-        run: pnpm exec tsc --noEmit
+        run: pnpm exec tsc -p tsconfig.app.json --noEmit
 
       # - name: Run tests
       #   run: pnpm test:run
 
       - name: Build
-        run: pnpm build
+        run: pnpm exec tsc -p tsconfig.app.json && pnpm exec vite build
+
+      - name: Debug file structure
+        run: ls -R src/lib

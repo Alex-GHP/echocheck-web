@@ -9,6 +9,7 @@ class Settings(BaseSettings):
 
     mongodb_uri: str = "mongodb://localhost:27017"
     mongodb_db_name: str = "echocheck"
+    cors_origins: list[str] = ["*"]
 
     hf_model_name: str = "alxdev/echocheck-political-stance"
 

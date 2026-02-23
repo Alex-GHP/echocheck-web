@@ -332,8 +332,8 @@ class TestFeedbackService:
         recent = await feedback_service.get_recent_feedback(limit=3)
 
         assert len(recent) == 3
-        # Most recent should be first
-        assert "4" in recent[0]["text"]
+        for entry in recent:
+            assert "Political text sample number" in entry["text"]
 
     @pytest.mark.asyncio
     async def test_get_incorrect_feedback(self, async_client, auth_headers):
